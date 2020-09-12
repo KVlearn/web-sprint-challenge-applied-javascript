@@ -27,14 +27,23 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What is the DOM?
+DOM refers to Document Object Model. DOM is an API - programming interface to interact with the browser. DOM gives the object orientation of the web page document, so we can add/delete/change the content of the HTML document. 
 
 2. What is an event?
+Event is any action that takes place in the DOM. An event gets triggered by user action of say mouse click, keyboard key press etc. 
 
 3. What is an event listener?
+Event Listeners sets a callback function that takes place whenever a specified event occurs in the HTML element.  
 
 4. Why would we convert a NodeList into an Array?
+NodeList are Array like representation of DOM elements- that is returned from querySelectorAll().
+These NodeList allows us to use .forEach , however not all array functions could be used on it say .slice or .filter. In order to be able take advantage of array methods , we can convert NodeList into an Array by below methods:
+
+Array.from(NodeList)
+Array.prototype.slice()
 
 5. What is a component?
+Components are reusable functions of code.  They mostly returns a newly created DOM Element which we will attach to the DOM. 
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 

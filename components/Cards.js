@@ -20,3 +20,72 @@
 // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
+
+axios.get('https://lambda-times-api.herokuapp.com/articles')
+.then(response=>{
+    console.log(response.data.articles)
+    /* articles is an object - that has many key:value pairs,
+    For in loop to loop thru each pair ie each key
+    The value of each key is an array. Loop thru each value array - which is an object(The obj to be used for creating artile!)*/
+    let articles=response.data.articles;
+    /*Loop thru the Objects:
+    /* Retrieve the Array of Keys ie topics */
+    let topicKey=Object.keys(articles);
+    const cardsContainer=document.querySelector('.cards-container');
+    console.log(topicKey);
+    /* Loop over Object */
+    for (let topic in articles){
+        /*key is topics,value is articles[topics]*/
+        // console.log(`key= ${topics} value = ${articles[topics]}`)
+        let topicArray=articles[topic];
+        topicArray.forEach(item=>{
+            cardsContainer.appendChild(cardCreator(item,topic));/**takes article object from api , returns div card*//*property here is topic*/
+        })
+     }
+})
+.catch(err=>{
+    console.log('oops something went wrong!',err);
+    const errmsg=document.createElement('div');
+    const cardContainer=document.querySelector('.cards-container');
+    cardContainer.appendChild(errmsg);
+    errmsg.textContent=`Oops Check error!!! ${err.message}`;
+    errmsg.style.background="snow";
+    errmsg.style.color="indianred";
+    errmsg.style.fontSize="30px"
+    const img=document.createElement('img');
+    img.src="https://images.unsplash.com/photo-1594322436404-5a0526db4d13?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1915&q=80";
+    errmsg.appendChild(img);
+    img.style.width="60%";
+    img.style.marginLeft="250px";
+    img.style.paddingTop="25px";
+})
+
+function cardCreator(articleObj,topic){
+    const card=document.createElement('div');
+    card.classList.add('card');
+    card.classList.add(`card_${topic}`); /*for click and filter display*/
+
+    const headline=document.createElement('div');
+    headline.classList.add('headline');
+    headline.textContent=articleObj.headline;
+    card.appendChild(headline);
+
+    const author=document.createElement('div');
+    author.classList.add('author');
+    card.appendChild(author);
+    
+    const imgContainer=document.createElement('div');
+    imgContainer.classList.add('img-container');
+    author.appendChild(imgContainer);
+    
+    const authorImg=document.createElement('img');
+    authorImg.src=articleObj.authorPhoto;
+    imgContainer.appendChild(authorImg);
+
+
+    card.addEventListener('click',()=>{
+        console.log(articleObj.headline);
+    })
+     
+    return card;
+}

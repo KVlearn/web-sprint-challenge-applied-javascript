@@ -24,13 +24,11 @@
 axios.get('https://lambda-times-api.herokuapp.com/articles')
 .then(response=>{
     console.log(response.data.articles)
-    /*retuns an articles object . Key value articles is an object with topics as key and each of its value is an array of objects => each one of this objects has to be passed to create card */
-    /*  articles is an object - that has many key:value pairs,
+    /* articles is an object - that has many key:value pairs,
     For in loop to loop thru each pair ie each key
     The value of each key is an array. Loop thru each value array - which is an object(The obj to be used for creating artile!)*/
     let articles=response.data.articles;
     /*Loop thru the Objects:
-    The better way to loop through objects is first to convert the object into an array. Then, you loop through the array.*/
     /* Retrieve the Array of Keys ie topics */
     let topicKey=Object.keys(articles);
     const cardsContainer=document.querySelector('.cards-container');
@@ -46,7 +44,7 @@ axios.get('https://lambda-times-api.herokuapp.com/articles')
      }
 })
 .catch(err=>{
-    console.log('oops something went wrong!',err.message);
+    console.log('oops something went wrong!',err);
     const errmsg=document.createElement('div');
     const cardContainer=document.querySelector('.cards-container');
     cardContainer.appendChild(errmsg);

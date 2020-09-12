@@ -88,23 +88,18 @@ leftButton.addEventListener('click',()=>{
 })
 
 rightButton.addEventListener('click',()=>{
-  // move next index image //
-  // if (index===length){
-  //   /*disable right click button */
-  //   const rightb=document.querySelector('.right-button');
-  //   rightb.style.display="none";
-  //   index=0;
-  // }
-  if(index<length-1){
-  console.log('im in rightclick event');
-  displayImg[index].style.display="none";
-  displayImg[index+1].style.display="block";
-  index++
+ /*Loop thru the index of image*/
+  // console.log('length=',length);
+  // console.log('index=',index)
+  if (index===length-1){
+    console.log('inside',index);
+    displayImg[index].style.display="none";
+    index=0
+    displayImg[index].style.display="block";
   }else{
-  index=0;
-  displayImg[index].style.display="none";
-  displayImg[index+1].style.display="block";
-  index++
+    console.log('im in rightclick event');
+    displayImg[index].style.display="none";
+    displayImg[index+1].style.display="block";
+    index++
   }
-
 })
